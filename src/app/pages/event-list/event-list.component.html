@@ -15,7 +15,7 @@
         <p>Try adjusting your filters or add a new event to get started!</p>
       </div>
 
-      <div *ngFor="let event of events; trackBy: trackByEventId" class="event-item" [class.completed]="event.completed">
+      <div *ngFor="let event of events; trackBy: trackByEventId" class="event-item" [class.completed]="event.completed" [class.past]="isPastEvent(event.date)">
         <div class="event-content" (click)="onViewEvent(event)">
           <div class="event-main">
             <h3 class="event-name">{{ event.name }}</h3>

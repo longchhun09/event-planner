@@ -26,5 +26,6 @@ export interface EventFilter {
   dateFrom?: Date;
   dateTo?: Date;
   searchTerm?: string;
+  timeFilter?: 'all' | 'upcoming' | 'past';
 }
 

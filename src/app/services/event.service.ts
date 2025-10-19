@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, throwError, of } from 'rxjs';
-import { map, shareReplay, catchError, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, shareReplay, } from 'rxjs/operators';
 import { Event, EventCategory, EventFilter } from '../models/event.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { getCurrentDate, getTodayAtMidnight, parseDateFields } from '../utils/date-time.util';
@@ -109,6 +109,15 @@ export class EventService {
     return this.events$.pipe(
       map(events => {
         let filtered = [...events];
+        const today = getTodayAtMidnight();
+
+        // Apply time filter (all, upcoming, or past)
+        if (filter.timeFilter === 'upcoming') {
+          filtered = filtered.filter(event => new Date(event.date) >= today);
+        } else if (filter.timeFilter === 'past') {
+          filtered = filtered.filter(event => new Date(event.date) < today);
+        }
+        // 'all' shows everything, no filtering needed
 
         if (filter.category) {
           filtered = filtered.filter(event => event.category === filter.category);

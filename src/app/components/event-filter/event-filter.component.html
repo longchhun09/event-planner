@@ -33,6 +33,19 @@
 
   <div class="filter-content">
     <div class="filter-row">
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Time Period</mat-label>
+        <mat-select
+          [(ngModel)]="timeFilter"
+          (ngModelChange)="onFilterChange()"
+        >
+          <mat-option *ngFor="let filter of timeFilters" [value]="filter.value">
+            {{ filter.label }}
+          </mat-option>
+        </mat-select>
+        <mat-icon matPrefix>event</mat-icon>
+      </mat-form-field>
+
       <mat-form-field appearance="outline" class="filter-field search-field">
         <mat-label>Search</mat-label>
         <input

@@ -31,10 +31,16 @@ export class EventListComponent {
   private router = inject(Router);
   private dialog = inject(MatDialog);
 
-  protected filteredEvents$ = this.eventService.getUpcomingEvents$();
+  protected filteredEvents$ = this.eventService.filterEvents({ timeFilter: 'upcoming' });
 
   onFilterChange(filter: EventFilter): void {
     this.filteredEvents$ = this.eventService.filterEvents(filter);
+  }
+
+  isPastEvent(eventDate: Date): boolean {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return new Date(eventDate) < today;
   }
 
   onViewEvent(event: Event): void {

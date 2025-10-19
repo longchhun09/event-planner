@@ -58,9 +58,17 @@
       color: $text-disabled;
     }
   }
+
+  &.past {
+    opacity: 0.6;
+
+    .event-name,
+    .event-details {
+      color: $text-disabled;
+    }
+  }
 }
 
-// Event Content
 .event-content {
   flex: 1;
   min-width: 0;

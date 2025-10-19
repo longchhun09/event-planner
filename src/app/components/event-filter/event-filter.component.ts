@@ -40,17 +40,24 @@ export class EventFilterComponent {
   protected selectedCategory: EventCategory | '' = '';
   protected dateFrom: Date | null = null;
   protected dateTo: Date | null = null;
+  protected timeFilter: 'all' | 'upcoming' | 'past' = 'upcoming';
   protected isExpanded = false;
 
   // Expose categories for template
   protected categories = Object.values(EventCategory);
+  protected timeFilters = [
+    { value: 'all', label: 'All Events' },
+    { value: 'upcoming', label: 'Upcoming Only' },
+    { value: 'past', label: 'Past Only' }
+  ];
 
   onFilterChange(): void {
     const filter: EventFilter = {
       searchTerm: this.searchTerm || undefined,
       category: this.selectedCategory || undefined,
       dateFrom: this.dateFrom || undefined,
-      dateTo: this.dateTo || undefined
+      dateTo: this.dateTo || undefined,
+      timeFilter: this.timeFilter
     };
 
     this.filterChange.emit(filter);
@@ -61,6 +68,7 @@ export class EventFilterComponent {
     this.selectedCategory = '';
     this.dateFrom = null;
     this.dateTo = null;
+    this.timeFilter = 'upcoming';
     this.onFilterChange();
   }
 
@@ -69,7 +77,8 @@ export class EventFilterComponent {
       this.searchTerm ||
       this.selectedCategory ||
       this.dateFrom ||
-      this.dateTo
+      this.dateTo ||
+      this.timeFilter !== 'upcoming'
     );
   }
 
@@ -79,11 +88,16 @@ export class EventFilterComponent {
     if (this.selectedCategory) count++;
     if (this.dateFrom) count++;
     if (this.dateTo) count++;
+    if (this.timeFilter !== 'upcoming') count++;
     return count;
   }
 
   getFilterSummary(): string {
     const filters: string[] = [];
+    if (this.timeFilter !== 'upcoming') {
+      const timeLabel = this.timeFilters.find(t => t.value === this.timeFilter)?.label || '';
+      filters.push(timeLabel);
+    }
     if (this.searchTerm) filters.push(`Search: "${this.searchTerm}"`);
     if (this.selectedCategory) filters.push(this.selectedCategory);
     if (this.dateFrom || this.dateTo) filters.push('Date range');
