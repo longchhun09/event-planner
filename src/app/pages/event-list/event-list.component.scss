@@ -60,51 +60,6 @@
   }
 }
 
-// Checkbox
-.event-checkbox {
-  position: relative;
-}
-
-.checkbox-input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-
-  &:checked + .checkbox-label {
-    background: $primary-color;
-    border-color: $primary-color;
-
-    &::after {
-      content: '';
-      position: absolute;
-      left: 6px;
-      top: 2px;
-      width: 6px;
-      height: 10px;
-      border: solid $primary-contrast;
-      border-width: 0 2px 2px 0;
-      transform: rotate(45deg);
-    }
-  }
-}
-
-.checkbox-label {
-  display: block;
-  width: 20px;
-  height: 20px;
-  border: 2px solid $border-dark;
-  border-radius: $radius-sm;
-  cursor: pointer;
-  transition: all $transition-fast;
-  position: relative;
-
-  &:hover {
-    border-color: $primary-color;
-  }
-}
-
 // Event Content
 .event-content {
   flex: 1;
