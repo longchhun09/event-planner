@@ -9,12 +9,17 @@
 
 ### Installation
 
-1. Navigate to the project directory:
+1. Clone the repository:
    ```bash
-   cd /dev/todo-app-angular
+   git clone git@github.com:longchhun09/event-planner.git
    ```
 
-2. Install dependencies (if not already done):
+2. Navigate to the project directory:
+   ```bash
+   cd event-planner
+   ```
+
+3. Install dependencies:
    ```bash
    npm install
    ```
