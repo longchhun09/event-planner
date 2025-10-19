@@ -4,6 +4,7 @@ import { map, shareReplay, } from 'rxjs/operators';
 import { Event, EventCategory, EventFilter } from '../models/event.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { getCurrentDate, getTodayAtMidnight, parseDateFields } from '../utils/date-time.util';
+import { generateSampleEvents } from '../utils/sample-events.util';
 
 @Injectable({
   providedIn: 'root'
@@ -238,42 +239,7 @@ export class EventService {
   }
 
   private loadSampleData(): void {
-    const sampleEvents: Event[] = [
-      {
-        id: crypto.randomUUID(),
-        name: 'Angular Connect 2025',
-        date: new Date('2025-11-15'),
-        time: '09:00',
-        location: 'San Francisco, CA',
-        category: EventCategory.CONFERENCE,
-        description: 'The largest Angular conference of the year featuring talks from core team members and industry experts.',
-        createdAt: getCurrentDate(),
-        updatedAt: getCurrentDate()
-      },
-      {
-        id: crypto.randomUUID(),
-        name: 'TypeScript Workshop',
-        date: new Date('2025-10-20'),
-        time: '14:00',
-        location: 'Online',
-        category: EventCategory.WORKSHOP,
-        description: 'Advanced TypeScript patterns and best practices workshop for intermediate to advanced developers.',
-        createdAt: getCurrentDate(),
-        updatedAt: getCurrentDate()
-      },
-      {
-        id: crypto.randomUUID(),
-        name: 'Tech Meetup - Web Dev',
-        date: new Date('2025-10-18'),
-        time: '18:30',
-        location: 'New York, NY',
-        category: EventCategory.MEETUP,
-        description: 'Monthly meetup for web developers to share knowledge, network, and discuss latest trends.',
-        createdAt: getCurrentDate(),
-        updatedAt: getCurrentDate()
-      }
-    ];
-
+    const sampleEvents = generateSampleEvents();
     this.eventsSubject.next(sampleEvents);
     this.saveEventsToStorage();
   }
