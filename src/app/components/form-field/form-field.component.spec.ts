@@ -189,13 +189,13 @@ describe('FormFieldComponent', () => {
   });
 
   it('should handle ControlValueAccessor registerOnChange', () => {
-    const fn = jest.fn();
+    const fn = jasmine.createSpy();
     component.registerOnChange(fn);
     expect(component.onChange).toBe(fn);
   });
 
   it('should handle ControlValueAccessor registerOnTouched', () => {
-    const fn = jest.fn();
+    const fn = jasmine.createSpy();
     component.registerOnTouched(fn);
     expect(component.onTouched).toBe(fn);
   });
