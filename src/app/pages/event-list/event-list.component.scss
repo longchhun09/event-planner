@@ -1,5 +1,6 @@
-@import '../../../styles/variables';
-@import '../../../styles/mixins';
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+@use 'sass:color';
 
 .event-list-container {
   padding: $spacing-xxxl;
@@ -195,11 +196,11 @@
 }
 
 .delete-btn {
-  background: lighten($error-light, 20%);
+  background: color.adjust($error-light, $lightness: 20%);
   color: $error-dark;
 
   &:hover {
-    background: lighten($error-light, 10%);
+    background: color.adjust($error-light, $lightness: 10%);
     transform: scale(1.05);
   }
 }

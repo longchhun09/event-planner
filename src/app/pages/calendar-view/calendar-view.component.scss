@@ -1,5 +1,6 @@
-@import '../../../styles/variables';
-@import '../../../styles/mixins';
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+@use 'sass:color';
 
 .page-container {
   max-width: 1400px;
@@ -148,7 +149,7 @@
   }
 
   &.other-month {
-    background: lighten($bg-light, 2%);
+    background: color.adjust($bg-light, $lightness: 2%);
     opacity: 0.5;
   }
 
@@ -192,7 +193,7 @@
   transition: all $transition-fast;
   display: flex;
   flex-direction: column;
-  gap: $spacing-xs / 2;
+  gap: calc($spacing-xs / 2);
 
   &:hover {
     transform: translateX(2px);
@@ -294,7 +295,7 @@
   }
 
   .event-badge {
-    padding: $spacing-xs / 2 $spacing-xs;
+    padding: calc($spacing-xs / 2) $spacing-xs;
     font-size: $font-size-xs - 0.125rem;
   }
 

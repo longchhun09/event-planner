@@ -1,5 +1,6 @@
-@import '../../../styles/variables';
-@import '../../../styles/mixins';
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+@use 'sass:color';
 
 .page-container {
   max-width: 800px;
@@ -147,7 +148,7 @@
   color: $text-secondary;
 
   &:hover {
-    background: darken($border-color, 5%);
+    background: color.adjust($border-color, $lightness: -5%);
   }
 }
 
