@@ -1,8 +1,11 @@
 import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { EventService } from '../../services/event.service';
 import { Event } from '../../models/event.model';
+import { EventDetailDialogComponent } from '../../components/event-detail-dialog/event-detail-dialog.component';
+import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 import {
   formatMonthYear,
   isSameDay,
@@ -29,6 +32,7 @@ interface CalendarDay {
 export class CalendarViewComponent {
   private eventService = inject(EventService);
   private router = inject(Router);
+  private dialog = inject(MatDialog);
 
   protected currentDate = signal(getCurrentDate());
   protected allEvents = signal<Event[]>([]);
@@ -128,7 +132,53 @@ export class CalendarViewComponent {
   }
 
   onEventClick(event: Event): void {
-    this.router.navigate(['/events', event.id, 'edit']);
+    const dialogRef = this.dialog.open(EventDetailDialogComponent, {
+      width: '600px',
+      maxWidth: '90vw',
+      panelClass: 'event-detail-dialog-container',
+      autoFocus: true,
+      restoreFocus: true,
+      data: {
+        event: event
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (result.action === 'edit') {
+          this.onEditEvent(result.eventId);
+        } else if (result.action === 'delete') {
+          this.onDeleteEvent(result.eventId);
+        }
+      }
+    });
+  }
+
+  onEditEvent(eventId: string): void {
+    this.router.navigate(['/events', eventId, 'edit']);
+  }
+
+  onDeleteEvent(eventId: string): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '450px',
+      maxWidth: '90vw',
+      panelClass: 'confirm-dialog-container',
+      autoFocus: true,
+      restoreFocus: true,
+      data: {
+        title: 'Delete Event',
+        message: 'Are you sure you want to delete this event? This action cannot be undone.',
+        confirmText: 'Delete',
+        cancelText: 'Cancel',
+        type: 'error'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.eventService.deleteEvent(eventId);
+      }
+    });
   }
 
   getDayNumber(date: Date): number {
