@@ -1,0 +1,173 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.page-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: $spacing-xxxl $spacing-lg;
+}
+
+.page-header {
+  margin-bottom: $spacing-xxxl;
+}
+
+.header-content h1 {
+  margin: 0 0 $spacing-sm 0;
+  color: $text-secondary;
+  font-size: $font-size-xxxl + 0.5rem;
+  font-weight: 800;
+}
+
+.subtitle {
+  margin: 0;
+  color: $text-hint;
+  font-size: $font-size-lg;
+}
+
+.form-container {
+  background: $bg-white;
+  border-radius: $radius-lg;
+  @include card-shadow('light');
+  padding: $spacing-xxxl;
+}
+
+.form-group {
+  margin-bottom: $spacing-xxl;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-xxl;
+  margin-bottom: $spacing-xxl;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: $spacing-sm;
+  font-size: $font-size-sm + 0.0625rem;
+  font-weight: $font-weight-semibold;
+  color: $text-secondary;
+}
+
+.required {
+  color: $error-color;
+}
+
+.optional {
+  color: $text-disabled;
+  font-weight: $font-weight-normal;
+  font-size: $font-size-sm;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  @include form-field-base;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  &.invalid {
+    border-color: $error-color;
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba($error-color, 0.1);
+    }
+  }
+}
+
+.form-select {
+  cursor: pointer;
+  background: $bg-white;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.error-message {
+  margin-top: $spacing-sm;
+  color: $error-color;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+}
+
+.event-metadata {
+  background: $bg-light;
+  padding: $spacing-lg $spacing-xl;
+  border-radius: $radius-md;
+  margin-bottom: $spacing-xxl;
+
+  p {
+    margin: $spacing-sm 0;
+    color: $text-hint;
+    font-size: $font-size-sm + 0.0625rem;
+  }
+
+  strong {
+    color: $text-secondary;
+  }
+}
+
+.form-actions {
+  @include flex-end;
+  gap: $spacing-lg;
+  margin-top: $spacing-xxxl;
+  padding-top: $spacing-xxxl;
+  border-top: 2px solid $border-color;
+}
+
+.btn {
+  @include button-base;
+  padding: $spacing-sm + 2px $spacing-xl + 4px;
+  font-size: $font-size-base;
+  @include flex-center;
+  gap: $spacing-sm;
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, $primary-light 0%, $primary-dark 100%);
+  color: $primary-contrast;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba($primary-color, 0.4);
+  }
+}
+
+.btn-secondary {
+  background: $border-color;
+  color: $text-secondary;
+
+  &:hover {
+    background: darken($border-color, 5%);
+  }
+}
+
+@include respond-to('md') {
+  .header-content h1 {
+    font-size: $font-size-xxxl;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+

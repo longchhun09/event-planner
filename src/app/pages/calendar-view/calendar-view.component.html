@@ -1,0 +1,107 @@
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-content">
+      <h1>📅 Calendar View</h1>
+    </div>
+    <a routerLink="/events/new" class="btn btn-primary">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M10 2C9.4 2 9 2.4 9 3V9H3C2.4 9 2 9.4 2 10C2 10.6 2.4 11 3 11H9V17C9 17.6 9.4 18 10 18C10.6 18 11 17.6 11 17V11H17C17.6 11 18 10.6 18 10C18 9.4 17.6 9 17 9H11V3C11 2.4 10.6 2 10 2Z"/>
+      </svg>
+      Add New Event
+    </a>
+  </div>
+
+  <div class="calendar-container">
+    <!-- Calendar Controls -->
+    <div class="calendar-controls">
+      
+      <button class="btn-nav" (click)="previousMonth()" title="Previous month">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+        </svg>
+      </button>
+
+      <h2 class="calendar-title">{{ currentMonth() }}</h2>
+
+      <button class="btn-nav" (click)="nextMonth()" title="Next month">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+        </svg>
+      </button>
+    </div>
+
+    <button class="btn-today" (click)="goToToday()">Today</button>
+
+    <!-- Calendar Grid -->
+    <div class="calendar-grid">
+      <!-- Week Day Headers -->
+      <div class="calendar-header" *ngFor="let day of weekDays">
+        {{ day }}
+      </div>
+
+      <!-- Calendar Days -->
+      <div
+        *ngFor="let day of calendarDays()"
+        class="calendar-day"
+        [class.other-month]="!day.isCurrentMonth"
+        [class.today]="day.isToday"
+        [class.has-events]="day.events.length > 0"
+      >
+        <div class="day-number">{{ getDayNumber(day.date) }}</div>
+
+        <div class="day-events" *ngIf="day.events.length > 0">
+          <div
+            *ngFor="let event of day.events"
+            class="event-badge"
+            [style.background]="getCategoryColor(event.category)"
+            (click)="onEventClick(event)"
+            [title]="event.name + ' at ' + event.time"
+          >
+            <span class="event-time">{{ event.time }}</span>
+            <span class="event-name">{{ event.name }}</span>
+          </div>
+
+          <div *ngIf="day.events.length > 2" class="more-events">
+            +{{ day.events.length - 2 }} more
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="calendar-legend">
+      <h3>Categories</h3>
+      <div class="legend-items">
+        <div class="legend-item">
+          <span class="legend-color" style="background: #667eea;"></span>
+          <span>Conference</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color" style="background: #f093fb;"></span>
+          <span>Meetup</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color" style="background: #4facfe;"></span>
+          <span>Workshop</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color" style="background: #43e97b;"></span>
+          <span>Seminar</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color" style="background: #fa709a;"></span>
+          <span>Networking</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color" style="background: #feca57;"></span>
+          <span>Social</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color" style="background: #95a5a6;"></span>
+          <span>Other</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,120 @@
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-content">
+      <h1>Edit Event</h1>
+    </div>
+  </div>
+
+  <div class="form-container" *ngIf="event">
+    <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+      <!-- Event Name -->
+      <app-form-field
+        [control]="eventForm.get('name')"
+        label="Event Name"
+        placeholder="e.g., Annual Tech Conference"
+        type="text"
+        [required]="true"
+        [fullWidth]="true"
+        appearance="outline"
+        [errorMessages]="{
+          required: 'Event name is required',
+          minlength: 'Event name must be at least 3 characters'
+        }"
+      ></app-form-field>
+
+      <!-- Date and Time Row -->
+      <div class="form-row">
+        <app-form-field
+          [control]="eventForm.get('date')"
+          fieldType="datepicker"
+          label="Date"
+          placeholder="Choose a date"
+          [required]="true"
+          [fullWidth]="true"
+          appearance="outline"
+          [errorMessages]="{
+            required: 'Date is required'
+          }"
+        ></app-form-field>
+
+        <app-form-field
+          [control]="eventForm.get('time')"
+          label="Time"
+          type="time"
+          [required]="true"
+          [fullWidth]="true"
+          appearance="outline"
+          [errorMessages]="{
+            required: 'Time is required'
+          }"
+        ></app-form-field>
+      </div>
+
+      <!-- Location and Category Row -->
+      <div class="form-row">
+        <app-form-field
+          [control]="eventForm.get('location')"
+          label="Location"
+          placeholder="e.g., San Francisco, CA"
+          type="text"
+          [required]="true"
+          [fullWidth]="true"
+          appearance="outline"
+          [errorMessages]="{
+            required: 'Location is required',
+            minlength: 'Location must be at least 3 characters'
+          }"
+        ></app-form-field>
+
+        <div class="form-group">
+          <label for="category">
+            Category <span class="required">*</span>
+          </label>
+          <select
+            id="category"
+            formControlName="category"
+            class="form-select"
+            [class.invalid]="submitted && f['category'].errors"
+          >
+            <option *ngFor="let category of categories" [value]="category">
+              {{ category }}
+            </option>
+          </select>
+          <div class="error-message" *ngIf="submitted && f['category'].errors">
+            <span *ngIf="f['category'].errors['required']">Category is required</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <app-form-field
+        [control]="eventForm.get('description')"
+        label="Description (optional)"
+        placeholder="Add additional details about your event..."
+        fieldType="textarea"
+        [rows]="4"
+        [required]="false"
+        [fullWidth]="true"
+        appearance="outline"
+      ></app-form-field>
+
+      <!-- Event Metadata -->
+      <div class="event-metadata">
+        <p><strong>Created:</strong> {{ event.createdAt | date: 'medium' }}</p>
+        <p><strong>Last Updated:</strong> {{ event.updatedAt | date: 'medium' }}</p>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <app-action-buttons
+          secondaryText="Cancel"
+          primaryText="Save Changes"
+          [primaryType]="'submit'"
+          [secondaryType]="'button'"
+          (secondaryClick)="onCancel()"
+        ></app-action-buttons>
+      </div>
+    </form>
+  </div>
+</div>
+
