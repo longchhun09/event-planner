@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>
+  <span>{{ title }}</span>
+</h2>
+
+<mat-dialog-content [class]="'content-' + type">
+  <p>{{ message }}</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <app-action-buttons
+    [secondaryText]="cancelText"
+    [primaryText]="confirmText"
+    [primaryColor]="getPrimaryColor()"
+    (secondaryClick)="onCancel()"
+    (primaryClick)="onConfirm()"
+  ></app-action-buttons>
+</mat-dialog-actions>
+

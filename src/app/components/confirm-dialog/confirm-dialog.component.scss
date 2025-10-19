@@ -1,0 +1,70 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+h2[mat-dialog-title] {
+  color: $text-secondary;
+  font-weight: $font-weight-medium;
+  @include flex-start;
+  gap: $spacing-md;
+  margin-top: $spacing-md;
+}
+
+mat-dialog-content {
+  color: $text-hint;
+  line-height: 1.6;
+  min-width: 300px;
+
+  p {
+    margin: 0;
+    padding: $spacing-md $spacing-lg;
+    background: $bg-white;
+    border-radius: $radius-sm;
+    @include card-shadow('light');
+    transition: all $transition-base;
+  }
+}
+
+// Different border colors for different dialog types
+.content-warning p {
+  border-left: 4px solid $warning-color;
+}
+
+.content-error p {
+  border-left: 4px solid $error-color;
+}
+
+.content-info p {
+  border-left: 4px solid $info-color;
+}
+
+.content-success p {
+  border-left: 4px solid $success-color;
+}
+
+mat-dialog-actions {
+  padding: $spacing-lg $spacing-xxl;
+}
+
+h2[mat-dialog-title],
+mat-dialog-content,
+mat-dialog-actions {
+  transition: all $transition-base;
+}
+
+// Responsive design
+@include respond-to('md') {
+  mat-dialog-content {
+    min-width: 280px;
+    margin: 0 $spacing-lg;
+  }
+
+  h2[mat-dialog-title] {
+    padding: $spacing-xl $spacing-lg $spacing-md;
+    font-size: $font-size-lg;
+  }
+
+  mat-dialog-actions {
+    padding: $spacing-lg $spacing-lg $spacing-xl;
+  }
+}
+

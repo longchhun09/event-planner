@@ -1,0 +1,79 @@
+<div class="event-detail-dialog">
+  <div class="dialog-header">
+    <h2 mat-dialog-title>Event Details</h2>
+    <button class="close-btn" mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <mat-dialog-content class="dialog-content">
+    <div class="event-info">
+      <div class="info-row title-row">
+        <h3 class="event-title">{{ event.name }}</h3>
+        <span
+          class="event-category-badge"
+          [style.background]="getCategoryColor(event.category)"
+        >
+          {{ event.category }}
+        </span>
+      </div>
+
+      <div class="info-row">
+        <div class="info-item">
+          <mat-icon class="info-icon">schedule</mat-icon>
+          <div class="info-content">
+            <span class="info-label">Date & Time</span>
+            <span class="info-value">{{ formatEventDate(event.date) }} at {{ event.time }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-row">
+        <div class="info-item">
+          <mat-icon class="info-icon">location_on</mat-icon>
+          <div class="info-content">
+            <span class="info-label">Location</span>
+            <span class="info-value">{{ event.location }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-row" *ngIf="event.description">
+        <div class="info-item">
+          <mat-icon class="info-icon">description</mat-icon>
+          <div class="info-content">
+            <span class="info-label">Description</span>
+            <span class="info-value description-text">{{ event.description }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-row" *ngIf="event.completed !== undefined">
+        <div class="info-item">
+          <mat-icon class="info-icon">{{ event.completed ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+          <div class="info-content">
+            <span class="info-label">Status</span>
+            <span class="info-value" [class.completed-status]="event.completed">
+              {{ event.completed ? 'Completed' : 'Upcoming' }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="dialog-actions">
+    <button mat-button (click)="onClose()">Close</button>
+    <div class="action-buttons">
+      <button mat-raised-button color="primary" (click)="onEdit()">
+        <mat-icon>edit</mat-icon>
+        Edit
+      </button>
+      <button mat-raised-button color="warn" (click)="onDelete()">
+        <mat-icon>delete</mat-icon>
+        Delete
+      </button>
+    </div>
+  </mat-dialog-actions>
+</div>
+
