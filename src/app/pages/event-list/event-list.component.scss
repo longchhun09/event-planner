@@ -1,0 +1,301 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.event-list-container {
+  padding: $spacing-xxxl;
+  background: $bg-white;
+  min-height: 100vh;
+  position: relative;
+}
+
+// Header
+.list-header {
+  margin-bottom: $spacing-xxxl;
+}
+
+.list-title {
+  font-size: $font-size-xxxl;
+  font-weight: $font-weight-bold;
+  color: $text-secondary;
+  margin: 0;
+}
+
+// Filter Section
+.filter-section {
+  margin-bottom: $spacing-xxxl;
+}
+
+// Events List
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+// Event Item
+.event-item {
+  @include flex-start;
+  gap: $spacing-lg;
+  padding: $spacing-xl;
+  background: $bg-white;
+  border: 1px solid $border-light;
+  border-radius: $radius-md;
+  transition: all $transition-fast;
+  position: relative;
+
+  &:hover {
+    @include card-shadow('light');
+    transform: translateY(-1px);
+  }
+
+  &.completed {
+    opacity: 0.6;
+    background: $bg-light;
+
+    .event-name {
+      text-decoration: line-through;
+      color: $text-disabled;
+    }
+  }
+}
+
+// Checkbox
+.event-checkbox {
+  position: relative;
+}
+
+.checkbox-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+
+  &:checked + .checkbox-label {
+    background: $primary-color;
+    border-color: $primary-color;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 2px;
+      width: 6px;
+      height: 10px;
+      border: solid $primary-contrast;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+  }
+}
+
+.checkbox-label {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid $border-dark;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: all $transition-fast;
+  position: relative;
+
+  &:hover {
+    border-color: $primary-color;
+  }
+}
+
+// Event Content
+.event-content {
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.event-main {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.event-name {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $text-secondary;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.event-details {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+
+  span {
+    @include flex-start;
+    gap: $spacing-sm;
+    font-size: $font-size-sm;
+    color: $text-disabled;
+  }
+
+  mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.event-category {
+  display: inline-block;
+  padding: $spacing-xs $spacing-md;
+  border-radius: $radius-lg;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  color: $primary-contrast;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  align-self: flex-start;
+  margin-top: $spacing-sm;
+}
+
+// Action Buttons
+.event-actions {
+  display: flex;
+  gap: $spacing-sm;
+}
+
+.action-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: $radius-sm + 2px;
+  cursor: pointer;
+  @include flex-center;
+  transition: all $transition-fast;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.edit-btn {
+  background: $bg-primary;
+  color: $text-primary;
+
+  &:hover {
+    background: $bg-secondary;
+    transform: scale(1.05);
+  }
+}
+
+.delete-btn {
+  background: lighten($error-light, 20%);
+  color: $error-dark;
+
+  &:hover {
+    background: lighten($error-light, 10%);
+    transform: scale(1.05);
+  }
+}
+
+// Floating Action Button
+.fab {
+  position: fixed !important;
+  bottom: $spacing-xxxl;
+  right: $spacing-xxxl;
+  z-index: $z-index-dropdown;
+  @include card-shadow('medium');
+
+  mat-icon {
+    color: $primary-contrast;
+  }
+
+  &:hover {
+    @include card-shadow('dark');
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// Empty State
+.empty-state {
+  text-align: center;
+  padding: 4rem $spacing-xxxl;
+  color: $text-disabled;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: $spacing-lg;
+}
+
+.empty-state h3 {
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-semibold;
+  color: $text-secondary;
+  margin: 0 0 $spacing-sm 0;
+}
+
+.empty-state p {
+  font-size: $font-size-base;
+  margin: 0;
+}
+
+// Responsive Design
+@include respond-to('md') {
+  .event-list-container {
+    padding: $spacing-lg;
+  }
+
+  .list-title {
+    font-size: $font-size-xxl;
+  }
+
+  .event-item {
+    padding: $spacing-lg;
+    gap: $spacing-md;
+  }
+
+  .event-details {
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+
+  .event-actions {
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+
+  .action-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .fab {
+    bottom: $spacing-lg;
+    right: $spacing-lg;
+  }
+}
+
+@include respond-to('xs') {
+  .event-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-lg;
+  }
+
+  .event-actions {
+    flex-direction: row;
+    align-self: flex-end;
+  }
+}
+

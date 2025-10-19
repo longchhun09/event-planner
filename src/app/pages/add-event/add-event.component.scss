@@ -1,0 +1,35 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.page-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: $spacing-xxxl $spacing-lg;
+}
+
+.page-header {
+  margin-bottom: $spacing-xxxl;
+}
+
+// Responsive Design
+@include respond-to('md') {
+  .page-container {
+    padding: $spacing-lg;
+  }
+
+  .page-header h1 {
+    font-size: $font-size-xl + 0.25rem;
+  }
+
+  mat-card-content {
+    padding: $spacing-lg;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+
+    button {
+      width: 100%;
+    }
+  }
+}

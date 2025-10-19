@@ -1,0 +1,123 @@
+<div class="page-container" [@fadeIn]>
+  <div class="page-header">
+    <h1>
+      Add New Event
+    </h1>
+    <p class="subtitle">Create a new event to keep track of important dates</p>
+  </div>
+
+  <mat-card class="form-card" [@shake]="shakeState">
+    <mat-card-content>
+      <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+
+        <app-form-field
+          [control]="eventForm.get('name')"
+          label="Event Name"
+          placeholder="e.g., Annual Tech Conference"
+          type="text"
+          [required]="true"
+          [maxLength]="100"
+          [showCounter]="true"
+          [fullWidth]="true"
+          appearance="outline"
+          [errorMessages]="{
+            required: 'Event name is required',
+            minlength: 'Minimum 3 characters required',
+            maxlength: 'Maximum 100 characters allowed'
+          }"
+        ></app-form-field>
+
+        <div class="form-row">
+          <app-form-field
+            [control]="eventForm.get('date')"
+            fieldType="datepicker"
+            label="Date"
+            placeholder="Choose a date"
+            [required]="true"
+            [minDate]="minDate"
+            [fullWidth]="true"
+            appearance="outline"
+            [errorMessages]="{
+              required: 'Date is required'
+            }"
+          ></app-form-field>
+
+          <app-form-field
+            [control]="eventForm.get('time')"
+            label="Time"
+            type="time"
+            placeholder="HH:MM"
+            [required]="true"
+            [fullWidth]="true"
+            appearance="outline"
+            [errorMessages]="{
+              required: 'Time is required',
+              pattern: 'Invalid format (HH:MM)'
+            }"
+          ></app-form-field>
+        </div>
+
+        <div class="form-row">
+          <app-form-field
+            [control]="eventForm.get('location')"
+            label="Location"
+            placeholder="e.g., San Francisco, CA"
+            type="text"
+            [required]="true"
+            [maxLength]="200"
+            [showCounter]="true"
+            [fullWidth]="true"
+            appearance="outline"
+            [errorMessages]="{
+              required: 'Location is required',
+              minlength: 'Minimum 3 characters required',
+              maxlength: 'Maximum 200 characters allowed'
+            }"
+          ></app-form-field>
+
+          <mat-form-field appearance="outline" class="flex-1">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category" required>
+              <mat-option *ngFor="let category of categories" [value]="category">
+                {{ category }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="hasError('category')">
+              {{ getErrorMessage('category') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <app-form-field
+          [control]="eventForm.get('description')"
+          label="Description (Optional)"
+          placeholder="Add additional details about your event..."
+          fieldType="textarea"
+          [rows]="4"
+          [maxLength]="500"
+          [showCounter]="true"
+          [required]="false"
+          [fullWidth]="true"
+          appearance="outline"
+        ></app-form-field>
+
+        <mat-card-actions class="form-actions">
+          <app-action-buttons
+            secondaryText="Cancel"
+            primaryText="Create Event"
+            [primaryType]="'submit'"
+            [secondaryType]="'button'"
+            [isLoading]="isSubmitting"
+            [loadingText]="'Creating...'"
+            [primaryTooltip]="'Create a new event'"
+            (secondaryClick)="onCancel()"
+          ></app-action-buttons>
+        </mat-card-actions>
+
+        <div class="form-status" *ngIf="submitted && eventForm.invalid">
+          <span>Please fix the errors above before submitting.</span>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
