@@ -1,0 +1,136 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.event-card {
+  background: $bg-white;
+  border-radius: $radius-lg;
+  @include card-shadow('light');
+  transition: all $transition-base;
+  overflow: hidden;
+  border-left: 4px solid transparent;
+
+  &:hover {
+    @include card-shadow('medium');
+    transform: translateY(-2px);
+  }
+
+  &.past-event {
+    opacity: 0.7;
+    background: $bg-light;
+  }
+}
+
+.event-header {
+  @include flex-between;
+  padding: $spacing-lg $spacing-xl;
+  background: linear-gradient(135deg, $bg-light 0%, $border-light 100%);
+  border-bottom: 1px solid $border-color;
+}
+
+.event-category {
+  padding: $spacing-xs + 2px $spacing-sm + 6px;
+  border-radius: 20px;
+  font-size: $font-size-xs + 0.0625rem;
+  font-weight: $font-weight-semibold;
+  color: $primary-contrast;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.event-date {
+  @include flex-start;
+  gap: $spacing-sm;
+  color: $text-hint;
+  font-size: $font-size-sm + 0.0625rem;
+  font-weight: $font-weight-medium;
+}
+
+.event-body {
+  padding: $spacing-xl;
+}
+
+.event-name {
+  margin: 0 0 $spacing-lg 0;
+  color: $text-secondary;
+  font-size: $font-size-xl + 0.125rem;
+  font-weight: $font-weight-bold;
+  line-height: 1.3;
+}
+
+.event-details {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm + 2px;
+  margin-bottom: $spacing-lg;
+}
+
+.event-detail {
+  @include flex-start;
+  gap: $spacing-sm + 2px;
+  color: $text-hint;
+  font-size: $font-size-sm + 0.0625rem;
+
+  svg {
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+}
+
+.event-description {
+  margin: 0;
+  color: $text-hint;
+  line-height: 1.6;
+  font-size: $font-size-sm + 0.0625rem;
+}
+
+.event-footer {
+  display: flex;
+  gap: $spacing-md;
+  padding: $spacing-lg $spacing-xl;
+  background: $bg-light;
+  border-top: 1px solid $border-color;
+}
+
+.btn {
+  @include button-base;
+  flex: 1;
+  font-size: $font-size-sm + 0.0625rem;
+  @include flex-center;
+  gap: $spacing-sm;
+  text-decoration: none;
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.btn-edit {
+  @include button-variant($info-color, $primary-contrast, $info-dark);
+
+  &:hover {
+    @include hover-lift;
+    box-shadow: 0 4px 8px rgba($info-color, 0.3);
+  }
+}
+
+.btn-delete {
+  @include button-variant($error-color, $primary-contrast, $error-dark);
+
+  &:hover {
+    @include hover-lift;
+    box-shadow: 0 4px 8px rgba($error-color, 0.3);
+  }
+}
+
+@include respond-to('md') {
+  .event-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-sm;
+  }
+
+  .event-footer {
+    flex-direction: column;
+  }
+}
+

@@ -1,0 +1,97 @@
+<mat-expansion-panel
+  class="filter-panel"
+  [(expanded)]="isExpanded"
+>
+  <mat-expansion-panel-header class="filter-header">
+    <mat-panel-title>
+      <mat-icon>filter_list</mat-icon>
+      <span>Filters</span>
+      <span
+        *ngIf="hasActiveFilters()"
+        class="filter-count"
+        [matBadge]="getActiveFiltersCount()"
+        matBadgeColor="accent"
+        matBadgeSize="small"
+      ></span>
+    </mat-panel-title>
+    <mat-panel-description>
+      <span class="filter-summary">
+        {{ hasActiveFilters() ? getFilterSummary() : 'Click to filter events' }}
+      </span>
+      <button
+        *ngIf="hasActiveFilters()"
+        mat-icon-button
+        color="warn"
+        (click)="clearFilters(); $event.stopPropagation()"
+        matTooltip="Clear all filters"
+        class="clear-icon-btn"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <div class="filter-content">
+    <div class="filter-row">
+      <mat-form-field appearance="outline" class="filter-field search-field">
+        <mat-label>Search</mat-label>
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="searchTerm"
+          (ngModelChange)="onFilterChange()"
+          placeholder="Search events..."
+        />
+        <mat-icon matPrefix>search</mat-icon>
+        <button
+          *ngIf="searchTerm"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="searchTerm = ''; onFilterChange()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Category</mat-label>
+        <mat-select
+          [(ngModel)]="selectedCategory"
+          (ngModelChange)="onFilterChange()"
+        >
+          <mat-option value="">All</mat-option>
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{ category }}
+          </mat-option>
+        </mat-select>
+        <mat-icon matPrefix>category</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="filter-field date-field">
+        <mat-label>From</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerFrom"
+          [(ngModel)]="dateFrom"
+          (ngModelChange)="onFilterChange()"
+        />
+        <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+        <mat-datepicker #pickerFrom></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="filter-field date-field">
+        <mat-label>To</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerTo"
+          [(ngModel)]="dateTo"
+          (ngModelChange)="onFilterChange()"
+        />
+        <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+        <mat-datepicker #pickerTo></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+</mat-expansion-panel>
+

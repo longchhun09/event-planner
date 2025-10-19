@@ -1,0 +1,30 @@
+<div class="action-buttons">
+  <button
+    mat-stroked-button
+    [type]="secondaryType"
+    (click)="onSecondaryClick()"
+    [disabled]="disabled || isLoading"
+    [matTooltip]="secondaryTooltip || ''"
+    [matTooltipDisabled]="!secondaryTooltip"
+  >
+    {{ secondaryText }}
+  </button>
+
+  <button
+    mat-raised-button
+    [color]="primaryColor"
+    [type]="primaryType"
+    (click)="onPrimaryClick()"
+    [disabled]="disabled || isLoading"
+    [matTooltip]="primaryTooltip || ''"
+    [matTooltipDisabled]="!primaryTooltip"
+  >
+    <mat-spinner
+      *ngIf="isLoading"
+      diameter="20"
+      class="button-spinner"
+    ></mat-spinner>
+    {{ primaryButtonText }}
+  </button>
+</div>
+

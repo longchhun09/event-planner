@@ -1,0 +1,177 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.filter-panel {
+  margin-bottom: $spacing-xxl;
+  @include card-shadow('light');
+  border-radius: $radius-md !important;
+}
+
+// Header styling
+.filter-header {
+  background: $bg-primary;
+  color: $text-primary;
+}
+
+::ng-deep .filter-panel {
+  .mat-expansion-panel-header {
+    padding: $spacing-md $spacing-xl;
+    height: auto;
+    min-height: 56px;
+
+    &:hover {
+      background: $bg-secondary !important;
+    }
+
+    &.mat-expanded {
+      border-bottom: 1px solid $bg-tertiary;
+    }
+  }
+
+  .mat-expansion-panel-body {
+    padding: 0;
+    border-bottom: 1px solid $bg-tertiary;
+  }
+
+  // Panel title
+  .mat-expansion-panel-header-title {
+    @include flex-start;
+    gap: $spacing-sm;
+    color: $text-primary;
+    font-weight: $font-weight-semibold;
+    flex-grow: 0;
+    margin-right: $spacing-lg;
+
+    mat-icon {
+      color: $text-primary;
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  // Panel description
+  .mat-expansion-panel-header-description {
+    @include flex-between;
+    color: $text-primary;
+    flex-grow: 1;
+    margin-right: 0;
+  }
+
+  .mat-expansion-indicator::after {
+    color: $text-primary;
+  }
+}
+
+.filter-summary {
+  font-size: $font-size-sm;
+  @include text-ellipsis;
+  max-width: 400px;
+}
+
+.filter-count {
+  margin-left: $spacing-xs;
+}
+
+.clear-icon-btn {
+  margin-left: $spacing-sm;
+}
+
+// Content
+.filter-content {
+  padding: $spacing-lg $spacing-xl;
+  background: $bg-light;
+}
+
+.filter-row {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1fr;
+  gap: $spacing-md;
+  align-items: start;
+}
+
+.filter-field {
+  width: 100%;
+}
+
+.search-field {
+  min-width: 200px;
+}
+
+// Compact form fields
+::ng-deep .filter-panel {
+  .mat-mdc-form-field {
+    font-size: $font-size-sm;
+
+    .mat-mdc-text-field-wrapper {
+      padding-bottom: 0;
+    }
+
+    .mat-mdc-form-field-subscript-wrapper {
+      display: none;
+    }
+
+    .mat-icon {
+      color: $primary-color;
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .mat-mdc-text-field-wrapper {
+    background: $bg-white;
+  }
+
+  .mat-datepicker-toggle {
+    color: $primary-color;
+  }
+}
+
+// Badge styling
+::ng-deep .filter-count .mat-badge-content {
+  background: $primary-color;
+  color: $primary-contrast;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+}
+
+// Responsive design
+@include respond-to('lg') {
+  .filter-row {
+    grid-template-columns: 2fr 1.5fr;
+    gap: $spacing-md;
+  }
+
+  .date-field {
+    grid-column: span 1;
+  }
+}
+
+@include respond-to('md') {
+  .filter-row {
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+  }
+
+  .filter-summary {
+    max-width: 150px;
+    font-size: $font-size-xs;
+  }
+
+  ::ng-deep .filter-panel .mat-expansion-panel-header {
+    padding: $spacing-sm $spacing-lg;
+    min-height: 48px;
+  }
+
+  .filter-content {
+    padding: $spacing-md $spacing-lg;
+  }
+}
+
+// Smooth transitions
+.filter-panel,
+.filter-field {
+  transition: all $transition-base;
+}
+

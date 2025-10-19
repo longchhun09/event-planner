@@ -1,0 +1,15 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.action-buttons {
+  @include flex-end;
+  gap: $spacing-md;
+  flex-wrap: wrap;
+}
+
+.button-spinner {
+  display: inline-block;
+  margin-right: $spacing-sm;
+  vertical-align: middle;
+}
+
