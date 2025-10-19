@@ -1,0 +1,151 @@
+@import 'variables';
+
+// ===================================
+// Mixins
+// ===================================
+
+// Flexbox mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@mixin flex-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+// Card/Shadow mixins
+@mixin card-shadow($level: 'light') {
+  @if $level == 'light' {
+    box-shadow: 0 2px 8px $shadow-light;
+  } @else if $level == 'medium' {
+    box-shadow: 0 4px 12px $shadow-medium;
+  } @else if $level == 'dark' {
+    box-shadow: 0 6px 16px $shadow-dark;
+  }
+}
+
+@mixin hover-lift {
+  transition: transform $transition-base, box-shadow $transition-base;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px $shadow-medium;
+  }
+}
+
+// Typography mixins
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin line-clamp($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// Responsive mixins
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == 'xs' {
+    @media (max-width: $breakpoint-xs) { @content; }
+  } @else if $breakpoint == 'sm' {
+    @media (max-width: $breakpoint-sm) { @content; }
+  } @else if $breakpoint == 'md' {
+    @media (max-width: $breakpoint-md) { @content; }
+  } @else if $breakpoint == 'lg' {
+    @media (max-width: $breakpoint-lg) { @content; }
+  } @else if $breakpoint == 'xl' {
+    @media (max-width: $breakpoint-xl) { @content; }
+  }
+}
+
+// Button mixins
+@mixin button-base {
+  padding: $spacing-md $spacing-xl;
+  border: none;
+  border-radius: $radius-md;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  transition: all $transition-base;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+@mixin button-variant($bg-color, $text-color, $hover-color) {
+  background-color: $bg-color;
+  color: $text-color;
+
+  &:hover:not(:disabled) {
+    background-color: $hover-color;
+  }
+}
+
+// Form field mixins
+@mixin form-field-base {
+  width: 100%;
+  padding: $spacing-md $spacing-lg;
+  border: 2px solid $border-color;
+  border-radius: $radius-md;
+  font-size: $font-size-base;
+  transition: all $transition-base;
+
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+  }
+}
+
+// Animation mixins
+@mixin fade-in($duration: $transition-base) {
+  animation: fadeIn $duration ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@mixin pulse-animation($duration: 2s) {
+  animation: pulse $duration ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
