@@ -245,23 +245,25 @@ describe('EventService', () => {
   });
 
   describe('Observable Patterns', () => {
-    it('should share replay the events observable', (done) => {
-      let subscriptionCount = 0;
-
-      const subscription1 = service.getEvents$().subscribe(() => {
-        subscriptionCount++;
+    it('should share replay the events observable', () => {
+      let emissionCount = 0;
+      let receivedEvents: Event[][] = [];
+      
+      const subscription1 = service.getEvents$().subscribe(events => {
+        emissionCount++;
+        receivedEvents.push(events);
       });
 
-      const subscription2 = service.getEvents$().subscribe(() => {
-        subscriptionCount++;
-
-        // Both subscriptions should receive the same cached value
-        expect(subscriptionCount).toBe(2);
-
-        subscription1.unsubscribe();
-        subscription2.unsubscribe();
-        done();
+      const subscription2 = service.getEvents$().subscribe(events => {
+        emissionCount++;
+        receivedEvents.push(events);
       });
+
+      expect(emissionCount).toBe(2);
+      expect(receivedEvents[0]).toEqual(receivedEvents[1]);
+
+      subscription1.unsubscribe();
+      subscription2.unsubscribe();
     });
 
     it('should provide loading state', (done) => {
