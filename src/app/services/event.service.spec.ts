@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { EventService } from './event.service';
-import { Event, EventCategory } from '../models/event.model';
+import { EventService } from '@app/services/event.service';
+import { Event, EventCategory } from '@app/models/event.model';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
@@ -11,7 +11,7 @@ describe('EventService', () => {
   beforeEach(() => {
     // Create spy for localStorage
     localStorageSpy = jasmine.createSpyObj('localStorage', ['getItem', 'setItem', 'removeItem', 'clear']);
-    
+
     TestBed.configureTestingModule({
       imports: [MatSnackBarModule],
       providers: [
@@ -186,7 +186,7 @@ describe('EventService', () => {
     it('should search events by term', (done) => {
       service.filterEvents({ searchTerm: 'Angular' }).subscribe(events => {
         expect(events.length).toBeGreaterThan(0);
-        const hasAngular = events.some(e => 
+        const hasAngular = events.some(e =>
           e.name.toLowerCase().includes('angular') ||
           e.description?.toLowerCase().includes('angular')
         );
@@ -199,7 +199,7 @@ describe('EventService', () => {
       service.getUpcomingEvents$().subscribe(events => {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
-        
+
         events.forEach(event => {
           expect(new Date(event.date).getTime()).toBeGreaterThanOrEqual(today.getTime());
         });
@@ -254,10 +254,10 @@ describe('EventService', () => {
 
       const subscription2 = service.getEvents$().subscribe(() => {
         subscriptionCount++;
-        
+
         // Both subscriptions should receive the same cached value
         expect(subscriptionCount).toBe(2);
-        
+
         subscription1.unsubscribe();
         subscription2.unsubscribe();
         done();

@@ -2,12 +2,12 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { EventService } from '../../services/event.service';
-import { EventCategory } from '../../models/event.model';
-import { fadeInAnimation, shakeAnimation } from '../../animations/animations';
-import { FormFieldComponent } from '../../components/form-field/form-field.component';
-import { ActionButtonsComponent } from '../../components/action-buttons/action-buttons.component';
-import { TIME_PATTERN, getMinDate } from '../../utils/date-time.util';
+import { EventService } from '@app/services/event.service';
+import { EventCategory } from '@app/models/event.model';
+import { fadeInAnimation, shakeAnimation } from '@app/animations/animations';
+import { FormFieldComponent } from '@app/components/form-field/form-field.component';
+import { ActionButtonsComponent } from '@app/components/action-buttons/action-buttons.component';
+import { TIME_PATTERN, getMinDate } from '@app/utils/date-time.util';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';

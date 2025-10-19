@@ -3,8 +3,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AddEventComponent } from './add-event.component';
-import { EventService } from '../../services/event.service';
-import { EventCategory } from '../../models/event.model';
+import { EventService } from '@app/services/event.service';
+import { EventCategory } from '@app/models/event.model';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';

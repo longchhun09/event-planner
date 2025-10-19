@@ -1,10 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, shareReplay, } from 'rxjs/operators';
-import { Event, EventCategory, EventFilter } from '../models/event.model';
+import { Event, EventCategory, EventFilter } from '@app/models/event.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { getCurrentDate, getTodayAtMidnight, parseDateFields } from '../utils/date-time.util';
-import { generateSampleEvents } from '../utils/sample-events.util';
+import { getCurrentDate, getTodayAtMidnight, parseDateFields } from '@app/utils/date-time.util';
+import { generateSampleEvents } from '@app/utils/sample-events.util';
 
 @Injectable({
   providedIn: 'root'

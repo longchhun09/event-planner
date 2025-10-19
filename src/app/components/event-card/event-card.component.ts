@@ -1,9 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { Event } from '../../models/event.model';
-import { formatDateForDisplay, DATE_FORMAT_OPTIONS, isUpcoming } from '../../utils/date-time.util';
-import { getCategoryColor } from '../../utils/category-colors.util';
+import { Event } from '@app/models/event.model';
+import { formatDateForDisplay, DATE_FORMAT_OPTIONS, isUpcoming } from '@app/utils/date-time.util';
+import { getCategoryColor } from '@app/utils/category-colors.util';
 
 @Component({
   selector: 'app-event-card',

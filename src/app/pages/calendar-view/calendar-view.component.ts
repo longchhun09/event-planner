@@ -2,10 +2,10 @@ import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { EventService } from '../../services/event.service';
-import { Event } from '../../models/event.model';
-import { EventDetailDialogComponent } from '../../components/event-detail-dialog/event-detail-dialog.component';
-import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
+import { EventService } from '@app/services/event.service';
+import { Event } from '@app/models/event.model';
+import { EventDetailDialogComponent } from '@app/components/event-detail-dialog/event-detail-dialog.component';
+import { ConfirmDialogComponent } from '@app/components/confirm-dialog/confirm-dialog.component';
 import {
   formatMonthYear,
   isSameDay,
@@ -13,8 +13,8 @@ import {
   getFirstDayOfMonth,
   getLastDayOfMonth,
   normalizeToMidnight
-} from '../../utils/date-time.util';
-import { getCategoryColor } from '../../utils/category-colors.util';
+} from '@app/utils/date-time.util';
+import { getCategoryColor } from '@app/utils/category-colors.util';
 
 interface CalendarDay {
   date: Date;

@@ -2,11 +2,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EventService } from '../../services/event.service';
-import { EventCategory, Event } from '../../models/event.model';
-import { FormFieldComponent } from '../../components/form-field/form-field.component';
-import { ActionButtonsComponent } from '../../components/action-buttons/action-buttons.component';
-import { formatDateToISO, getMinDateISO } from '../../utils/date-time.util';
+import { EventService } from '@app/services/event.service';
+import { EventCategory, Event } from '@app/models/event.model';
+import { FormFieldComponent } from '@app/components/form-field/form-field.component';
+import { ActionButtonsComponent } from '@app/components/action-buttons/action-buttons.component';
+import { formatDateToISO, getMinDateISO } from '@app/utils/date-time.util';
 
 @Component({
   selector: 'app-edit-event',

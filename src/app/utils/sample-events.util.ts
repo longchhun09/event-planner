@@ -1,5 +1,5 @@
-import { Event, EventCategory } from '../models/event.model';
-import { getCurrentDate } from './date-time.util';
+import { Event, EventCategory } from '@app/models/event.model';
+import { getCurrentDate } from '@app/utils/date-time.util';
 
 /**
  * Generate sample events for initial data loading
