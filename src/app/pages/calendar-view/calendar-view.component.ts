@@ -12,7 +12,8 @@ import {
   getCurrentDate,
   getFirstDayOfMonth,
   getLastDayOfMonth,
-  normalizeToMidnight
+  normalizeToMidnight,
+  formatTimeTo12Hour
 } from '@app/utils/date-time.util';
 import { getCategoryColor } from '@app/utils/category-colors.util';
 
@@ -187,6 +188,10 @@ export class CalendarViewComponent {
 
   getCategoryColor(category: string): string {
     return getCategoryColor(category);
+  }
+
+  formatEventTime(time: string): string {
+    return formatTimeTo12Hour(time);
   }
 }
 
