@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/materia
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Event } from '../../models/event.model';
-import { formatDateForDisplay, DATE_FORMAT_OPTIONS } from '../../utils/date-time.util';
+import { formatDateForDisplay, DATE_FORMAT_OPTIONS, formatTimeTo12Hour } from '../../utils/date-time.util';
 import { getCategoryColor } from '../../utils/category-colors.util';
 
 export interface EventDetailDialogData {
@@ -30,6 +30,10 @@ export class EventDetailDialogComponent {
 
   formatEventDate(date: Date): string {
     return formatDateForDisplay(date, 'en-US', DATE_FORMAT_OPTIONS.LONG);
+  }
+
+  formatEventTime(time: string): string {
+    return formatTimeTo12Hour(time);
   }
 
   getCategoryColor(category: string): string {

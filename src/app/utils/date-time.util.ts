@@ -347,3 +347,27 @@ export function getRelativeDateString(date: Date, referenceDate: Date = getToday
   return formatDateForDisplay(date);
 }
 
+/**
+ * Format time from 24-hour format (HH:MM) to 12-hour format with am/pm (e.g., "2pm")
+ * @param timeString - Time string in HH:MM format
+ * @returns Formatted time string like "2pm" or "10:30am"
+ */
+export function formatTimeTo12Hour(timeString: string): string {
+  const parsed = parseTime(timeString);
+  if (!parsed) {
+    return timeString; // Return original if invalid
+  }
+
+  const { hours, minutes } = parsed;
+  const period = hours >= 12 ? 'pm' : 'am';
+  const hour12 = hours % 12 || 12; // Convert 0 to 12 for midnight
+
+  // If minutes are 0, just show the hour
+  if (minutes === 0) {
+    return `${hour12}${period}`;
+  }
+
+  // Otherwise show hour:minutes
+  return `${hour12}:${minutes.toString().padStart(2, '0')}${period}`;
+}
+

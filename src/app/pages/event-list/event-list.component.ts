@@ -7,7 +7,7 @@ import { EventFilterComponent } from '../../components/event-filter/event-filter
 import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 import { EventDetailDialogComponent } from '../../components/event-detail-dialog/event-detail-dialog.component';
 import { EventFilter, Event } from '../../models/event.model';
-import { formatDateForDisplay, DATE_FORMAT_OPTIONS } from '../../utils/date-time.util';
+import { formatDateForDisplay, DATE_FORMAT_OPTIONS, formatTimeTo12Hour } from '../../utils/date-time.util';
 import { getCategoryColor } from '../../utils/category-colors.util';
 
 import { MatIconModule } from '@angular/material/icon';
@@ -97,6 +97,10 @@ export class EventListComponent {
 
   formatEventDate(date: Date): string {
     return formatDateForDisplay(date, 'en-US', DATE_FORMAT_OPTIONS.SHORT);
+  }
+
+  formatEventTime(time: string): string {
+    return formatTimeTo12Hour(time);
   }
 
   getCategoryColor(category: string): string {
