@@ -1,0 +1,23 @@
+<div class="sidebar">
+  <!-- App Branding -->
+  <div class="branding">
+    <div class="logo">
+      <span class="logo-text">📅</span>
+    </div>
+    <div class="app-name">{{ appName }}</div>
+  </div>
+
+  <!-- Navigation Items -->
+  <nav class="nav-menu">
+    <a
+      *ngFor="let item of navItems"
+      [routerLink]="item.route"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: item.route === '/events' }"
+      class="nav-item"
+    >
+      <mat-icon class="nav-icon">{{ item.icon }}</mat-icon>
+      <span class="nav-label">{{ item.label }}</span>
+    </a>
+  </nav>
+</div>
