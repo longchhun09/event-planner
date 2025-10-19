@@ -1,0 +1,61 @@
+<mat-form-field
+  [appearance]="appearance"
+  [class.full-width]="fullWidth"
+>
+  <mat-label *ngIf="label">{{ label }}</mat-label>
+
+  <span matPrefix *ngIf="prefix">{{ prefix }}</span>
+
+  <input
+    *ngIf="fieldType === 'input'"
+    matInput
+    [formControl]="$any(control)"
+    [type]="type"
+    [placeholder]="placeholder"
+    [required]="required"
+    [attr.maxlength]="maxLength || null"
+    [disabled]="disabled"
+    [autocomplete]="autocomplete || 'off'"
+  />
+
+  <textarea
+    *ngIf="fieldType === 'textarea'"
+    matInput
+    [formControl]="$any(control)"
+    [placeholder]="placeholder"
+    [required]="required"
+    [attr.maxlength]="maxLength || null"
+    [rows]="rows"
+    [disabled]="disabled"
+  ></textarea>
+
+  <input
+    *ngIf="fieldType === 'datepicker'"
+    matInput
+    [matDatepicker]="picker"
+    [formControl]="$any(control)"
+    [placeholder]="placeholder"
+    [required]="required"
+    [min]="minDate || null"
+    [max]="maxDate || null"
+    [matDatepickerFilter]="dateFilter || undefined"
+    [disabled]="disabled"
+  />
+  <mat-datepicker-toggle
+    *ngIf="fieldType === 'datepicker'"
+    matPrefix
+    [for]="picker"
+  ></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+
+  <span matSuffix *ngIf="suffix">{{ suffix }}</span>
+
+  <mat-hint *ngIf="hint || showCounter" align="end">
+    {{ getHintText() }}
+  </mat-hint>
+
+  <mat-error *ngIf="hasError()">
+    {{ getErrorMessage() }}
+  </mat-error>
+</mat-form-field>
+

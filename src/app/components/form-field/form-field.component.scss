@@ -1,0 +1,36 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.full-width {
+  width: 100%;
+}
+
+mat-form-field {
+  margin-bottom: $spacing-lg;
+
+  // Ensure proper spacing for prefix/suffix
+  [matPrefix],
+  [matSuffix] {
+    padding: 0 $spacing-sm;
+  }
+}
+
+// Error message styling
+mat-error {
+  font-size: $font-size-sm;
+  margin-top: $spacing-xs;
+}
+
+// Hint text styling
+mat-hint {
+  font-size: $font-size-sm;
+  color: $text-hint;
+}
+
+// Responsive design
+@include respond-to('md') {
+  mat-form-field {
+    margin-bottom: $spacing-md;
+  }
+}
+
